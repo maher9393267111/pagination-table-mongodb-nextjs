@@ -19,14 +19,17 @@ export interface ToolModel {
 }
 
 class TodosStore {
-  // @ts-expect-error
-  @persist  token: string | null = null;
-  // @ts-expect-error
-  @persist("object") remember: {
-    email: string;
-    password: string;
-    rememberme: boolean;
-  } | null = null;
+  // // @ts-expect-error
+  persist   token: string | null = null;
+  
+
+
+
+  // @persist("object") remember: {
+  //   email: string;
+  //   password: string;
+  //   rememberme: boolean;
+  // } | null = null;
 
 
 
