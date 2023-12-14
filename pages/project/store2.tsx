@@ -1,37 +1,63 @@
-"use client";
-import { action, configure, makeAutoObservable, runInAction } from "mobx";
 
-configure({
-  enforceActions: "never",
-});
-export interface ITodoModel {
-  id: number;
-  text: string;
-  status: string;
-}
+// @ts-nocheck   
 
-export interface ToolModel {
-  fillColor: string;
-  strokeColor: string;
-  name: string;
-}
-
-class TodosStore2 {
+import { makeAutoObservable, configure } from "mobx";
+import { create, persist } from "mobx-persist";
 
 
-  todoDetails = "";
-  openModal: boolean = false;
-  store2 :string = "store2Text"
+configure({ enforceActions: "never" });
 
-
+class MainStoreC {
+  @persist token: string | null = null;
+ 
+  @persist("object") settings: {
+    bell: string;
+    bellVolume: number;
+    bellAgain: number;
+    orderStatusSelection: string;
+  } = {
+    bell: "temple_bell",
+    bellVolume: 0.25,
+    bellAgain: 2,
+    orderStatusSelection: "multiple",
+  };
+  @persist("object") remember: {
+    email: string;
+    password: string;
+    rememberme: boolean;
+  } | null = null;
 
   constructor() {
-    // makeAutoObservable(this);
-    makeAutoObservable(this, {});
+    makeAutoObservable(this);
   }
-
- 
+  // Token
+  setToken = (token: string) => {
+    this.token = token;
+  };
+  clearToken = () => (this.token = null);
+  // i18n
+  setLocale = (locale: string) => {
+    this.locale = locale;
+    window.location.reload();
+  };
+  // Remember
+  setRemember = (remember: { email: string; password: string; rememberme: boolean } | null) =>
+    (this.remember = remember);
+  // Settings
+  setSettings = (settings: {
+    bell: string;
+    bellVolume: number;
+    bellAgain: number;
+    orderStatusSelection: string;
+  }) => (this.settings = settings);
 }
 
-const todosStore2 = new TodosStore2();
-export default todosStore2;
+const hydrate = create({});
+
+const MStore = new MainStoreC();
+
+hydrate("MainStore", MStore).then(() => {
+  console.log("MainStore hydrated");
+});
+
+export default MStore;

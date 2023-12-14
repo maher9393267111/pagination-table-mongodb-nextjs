@@ -1,6 +1,6 @@
-"use client";
+
 import { action, configure, makeAutoObservable, runInAction ,observable } from "mobx";
-import todosStore2 from "./store2";
+
 import { create, persist } from "mobx-persist";
 
 configure({
@@ -23,12 +23,12 @@ class TodosStore {
   // title: string = "";
 
 
-
   
-  // // @ts-expect-error
-  persist: any 
-  observable : any
-  token: string | null = null;
+  
+  
+  // persist: any 
+  // observable : any
+  // token: string | null = null;
   
 
 
