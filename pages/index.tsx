@@ -7,10 +7,10 @@ import { Context } from "./_app";
 import toolState from "../store/one";
 
 const Canvas = observer(() => {
+// @ts-expect-error
+  const { cart  } = useContext(Context);
 
-  const { cart } = useContext(Context);
-
-  const changeColor = (e) => {
+  const changeColor = (e:React.ChangeEvent<HTMLInputElement>) => {
     toolState.setStrokeColor(e.target.value);
     toolState.setFillColor(e.target.value);
   };
@@ -20,7 +20,8 @@ const Canvas = observer(() => {
   return (
     <div className="canvas">
       <input
-        onChange={(e) => changeColor(e)}
+        onChange={ changeColor}
+        // onChange={(e) => changeColor(e)}
         style={{ marginLeft: 10 }}
         type="color"
       />
@@ -32,10 +33,12 @@ const Canvas = observer(() => {
 </div>
 
 
-      ...\
-      {cart?._quantityCartItems}
+      
+     
     </div>
   );
 });
 
 export default Canvas;
+
+

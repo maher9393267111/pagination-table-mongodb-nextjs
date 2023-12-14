@@ -2,6 +2,7 @@
 import * as React from "react";
 import todosStore, { ITodoModel } from "../store";
 import { observer } from "mobx-react-lite";
+import { Button } from '@zendeskgarden/react-buttons';
 
 function TodoListItems() {
   return (
@@ -17,6 +18,7 @@ function TodoListItems() {
         <option value="Compeleted">Completed</option>
       </select>
           <button className="px-6" onClick={() => todosStore.deleteTodo(todo.id)} >Delete</button>
+          <Button onClick={()=>todosStore.showTodoData(todo?.text)}>Open modal</Button>
         </div>
       ))}
     </>
