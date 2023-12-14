@@ -19,8 +19,15 @@ export interface ToolModel {
 }
 
 class TodosStore {
+  // @observable
+  // title: string = "";
+
+
+
+  
   // // @ts-expect-error
-  persist   token: string | null = null;
+  persist: any 
+  token: string | null = null;
   
 
 
