@@ -27,7 +27,7 @@ class TodosStore {
   
   // // @ts-expect-error
   persist: any 
-  token: string | null = null;
+  @observable token: string | null = null;
   
 
 
